@@ -12,7 +12,7 @@ Run `./target/debug/crossword-builder -h` for the usage message.
 ## Examples
 
 ```
-$./target/debug/crossword-builder puzzle-1 new 16
+$./target/debug/crossword-builder puzzle-16 new 16
 ▢ ▢ ▢ ▩ ▢ ▢ ▢ ▢ ▩ ▩ ▩ ▩ ▢ ▢ ▢ ▢
 ▢ ▢ ▢ ▩ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢
 ▢ ▢ ▢ ▩ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢
@@ -30,10 +30,21 @@ $./target/debug/crossword-builder puzzle-1 new 16
 ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▩ ▢ ▢ ▢
 ▢ ▢ ▢ ▢ ▩ ▩ ▩ ▩ ▢ ▢ ▢ ▢ ▩ ▢ ▢ ▢
 
-$ ./target/debug/crossword-builder puzzle-1 check-base
+$ ./target/debug/crossword-builder puzzle-16 check-base
 Puzzle base is valid
 
+$ ./target/debug/crossword-builder puzzle-5 display
+▩ H A T ▩
+P A L E R
+A L I N E
+L O B O S
+▩ S I R ▩
+
+$ ./target/debug/crossword-builder puzzle-5 check-words
+Loading dictionary from ./english3.txt
+Puzzle words are valid
 ```
+
 ## Future Improvements
 + **Grid generation** - currently, the randomly generated grids aren't always valid (especially for odd-sized grids).
 + **Saving clues** - add a way to associate clues with words and display them alongside the puzzle
