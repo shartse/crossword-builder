@@ -12,7 +12,7 @@ Run `./target/debug/crossword-builder -h` for the usage message.
 ## Examples
 
 ```
-$./target/debug/crossword-builder puzzle-16 new 16
+$./crossword-builder puzzle-17 new 16
 ▢ ▢ ▢ ▩ ▢ ▢ ▢ ▢ ▩ ▩ ▩ ▩ ▢ ▢ ▢ ▢
 ▢ ▢ ▢ ▩ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢
 ▢ ▢ ▢ ▩ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢
@@ -30,7 +30,7 @@ $./target/debug/crossword-builder puzzle-16 new 16
 ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ▩ ▢ ▢ ▢
 ▢ ▢ ▢ ▢ ▩ ▩ ▩ ▩ ▢ ▢ ▢ ▢ ▩ ▢ ▢ ▢
 
-$ ./target/debug/crossword-builder puzzle-16 check-base
+$ ./crossword-builder puzzle-16 check-base
 Puzzle base is valid
 
 $ ./target/debug/crossword-builder puzzle-5 display
@@ -40,12 +40,30 @@ A L I N E
 L O B O S
 ▩ S I R ▩
 
-$ ./target/debug/crossword-builder puzzle-5 check-words
+$ ./crossword-builder puzzle-5 check-words
 Loading dictionary from ./english3.txt
 Puzzle words are valid
+
+$ ./crossword-builder puzzle-6 display
+▩ ▢ ▢ ▢ D ▩
+C H E R U B
+▢ ▢ ▢ ▢ P ▢
+▢ ▢ ▢ ▢ L ▢
+▢ ▢ ▢ ▢ E ▢
+▩ ▢ ▢ ▢ X ▩
+
+$ ./crossword-builder puzzle-6 suggest 0 down
+There is no down word at index 0
+
+$ ./crossword-builder puzzle-6 suggest 1 down
+Loading dictionary from ./english3.txt
+["shrdlu", "churns", "chasse", "shores", "theism"]
+
+$ ./crossword-builder puzzle-6 suggest 3 down 10
+Loading dictionary from ./english3.txt
+["erinys", "frenzy", "artist", "pruned", "procne", "wroken", "craver", "crimes", "cranny", "croons"]
 ```
 
 ## Future Improvements
 + **Grid generation** - currently, the randomly generated grids aren't always valid (especially for odd-sized grids).
 + **Saving clues** - add a way to associate clues with words and display them alongside the puzzle
-+ **Word suggestions** - add an option to suggest words that would in the puzzle, given constraints of length and existing letters.
