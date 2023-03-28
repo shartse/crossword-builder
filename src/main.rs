@@ -107,7 +107,7 @@ fn main() {
             Err(e) => println!("{}", e),
         },
         Commands::Display => match Puzzle::open_from_file(name) {
-            Ok(puzzle) => println!("{}", puzzle.cells()),
+            Ok(puzzle) => puzzle.pretty_print(),
             Err(e) => println!("{}", e),
         },
         Commands::Suggest(suggest) => match Puzzle::open_from_file(name) {

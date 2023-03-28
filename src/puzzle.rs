@@ -95,6 +95,10 @@ impl Puzzle {
         Ok(Puzzle::from_grid(name, cells))
     }
 
+    pub fn pretty_print(&self) {
+        self.cells.pretty_print();
+    }
+
     fn from_grid(name: String, cells: Grid) -> Self {
         let size = cells.len();
         let transpose = cells.transpose();

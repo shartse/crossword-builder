@@ -39,6 +39,17 @@ impl Grid {
         Grid(grid)
     }
 
+    pub fn pretty_print(&self) {
+        let row_len = self.0.len();
+        for (idx, row) in self.0.iter().enumerate() {
+            print!(" {:3}: ", (idx * row_len));
+            for cell in row {
+                print!("{}", cell);
+            }
+            println!();
+        }
+    }
+
     pub fn from_bytes(buf: &Vec<u8>) -> Result<Self, GridError> {
         let mut cells = Vec::new();
         for row in buf.split(|x| *x == '\n' as u8) {
