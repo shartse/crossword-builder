@@ -1,10 +1,11 @@
 use clap::{Args, Parser, Subcommand};
+use dictionary::DICTIONARY;
 use puzzle::Puzzle;
 use std::fs::{self};
 
 mod dictionary;
+mod grid;
 mod puzzle;
-
 /*
 
 Improvements:
@@ -35,6 +36,16 @@ enum Commands {
     CheckWords,
     /// Display the puzzle
     Display,
+
+    Suggest(Suggest),
+}
+
+#[derive(Args)]
+struct Suggest {
+    index: usize,
+    direction: String,
+    #[arg(default_value_t = 5)]
+    count: usize,
 }
 
 #[derive(Args)]
@@ -97,6 +108,29 @@ fn main() {
         },
         Commands::Display => match Puzzle::open_from_file(name) {
             Ok(puzzle) => println!("{}", puzzle.cells()),
+            Err(e) => println!("{}", e),
+        },
+        Commands::Suggest(suggest) => match Puzzle::open_from_file(name) {
+            Ok(puzzle) => {
+                let partial_word = match suggest.direction.as_str() {
+                    "across" => puzzle.get_across_word(suggest.index),
+                    "down" => puzzle.get_down_word(suggest.index),
+                    x => {
+                        println!("Expected across or down, got {}", x);
+                        return;
+                    }
+                };
+                match partial_word {
+                    Some(word) => {
+                        let suggestions = DICTIONARY.suggest_words(word, suggest.count);
+                        println!("{:?}", suggestions)
+                    }
+                    None => println!(
+                        "There is no {} word at index {}",
+                        suggest.direction, suggest.index
+                    ),
+                }
+            }
             Err(e) => println!("{}", e),
         },
     }

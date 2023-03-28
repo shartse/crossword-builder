@@ -10,3 +10,4 @@ thiserror = "1.0"
 rand = "0.8.4"
 lazy_static = "1.4.0"
 clap = { version = "4.0.32", features = ["derive"] }
+regex = "1"
